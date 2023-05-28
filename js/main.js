@@ -23,4 +23,24 @@ function pintarUnPaciente(pPaciente, pDom) {
 
 }
 
-pintarPacientes(pacientes, sectionPacientes)
+pintarPacientes(pacientes, sectionPacientes);
+
+const filterForm = document.querySelector('#filterForm');
+filterForm.addEventListener('submit', getDataForm);
+
+function getDataForm(event) {
+  event.preventDefault();
+
+  let edadmin = event.target.edadmin.value;
+  let edadmax = event.target.edadmax.value;
+
+  let listaFiltrada = filtrarPorEdad(pacientes, edadmin, edadmax);
+
+  pintarPacientes(listaFiltrada, sectionPacientes);
+
+}
+
+function filtrarPorEdad(pList, pEdadMin, pEdadMax) {
+  return pList.filter(paciente => paciente.edad >= pEdadMin && paciente.edad <= pEdadMax);
+
+} 
